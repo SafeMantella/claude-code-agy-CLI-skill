@@ -1,6 +1,6 @@
 # 🚀 Claude Code × Antigravity CLI Skill
 
-> **Multi-agent skill for Claude Code** that delegates heavy tasks to Google's [Antigravity CLI](https://blog.google/technology/google-deepmind/antigravity/) agents — saving tokens while unlocking web search, image generation, codebase analysis, and 40+ scientific database integrations.
+> **Multi-agent skill for Claude Code** that delegates heavy tasks to Google's Antigravity CLI agents — saving tokens while unlocking web search, image generation, codebase analysis, and 40+ scientific database integrations.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Skill-blueviolet)](https://docs.anthropic.com/en/docs/claude-code)
