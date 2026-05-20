@@ -26,7 +26,7 @@ You ──► Claude Code ──► "this needs web search" ──► agy -p "..
 
 | Capability | Why Delegate? |
 |-----------|---------------|
-| 🔍 **Web Research** | Antigravity has `google_web_search` — Claude Code doesn't |
+| 🔍 **Web Research** | `google_web_search` grounding is more authoritative and real-time than Claude Code's DuckDuckGo |
 | 🎨 **Image Generation** | Antigravity has `generate_image` — Claude Code doesn't |
 | 🏗️ **Codebase Architecture** | Antigravity's `codebase_investigator` maps entire projects in one pass |
 | 🧬 **Science Queries** | 40+ specialized skills: gnomAD, UniProt, PubMed, AlphaFold, ChEMBL... |
