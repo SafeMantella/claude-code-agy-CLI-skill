@@ -6,6 +6,8 @@
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Skill-blueviolet)](https://docs.anthropic.com/en/docs/claude-code)
 [![Antigravity CLI](https://img.shields.io/badge/Antigravity_CLI-agy-orange)](https://blog.google/technology/google-deepmind/antigravity/)
 
+> **Migrating from `gemini-cli`?** This skill is its direct successor. The Gemini CLI binary stops working on **June 18, 2026** — swap in this skill and the `agy` binary to keep everything working.
+
 ---
 
 ## Why?
@@ -15,9 +17,9 @@ Claude Code is great at interactive coding. Antigravity CLI (`agy`) has exclusiv
 **Result:** You get the best of both AI agents while Claude uses fewer tokens.
 
 ```
-You → Claude Code → "this needs web research" → agy -p "search for..." → result → Claude Code → You
-         ↑                                                                            ↓
-    Keeps context lean                                              Only processes final output
+You ──► Claude Code ──► "this needs web search" ──► agy -p "..." ──► result ──► Claude Code ──► You
+             │                                                                         │
+       keeps context lean                                              only processes final output
 ```
 
 ## What Claude Code Can Delegate
@@ -47,18 +49,18 @@ You → Claude Code → "this needs web research" → agy -p "search for..." →
 git clone git@github.com:SafeMantella/claude-code-agy-CLI-skill.git ~/.claude/skills/antigravity-cli
 ```
 
-That's it. Claude Code auto-discovers skills from `~/.claude/skills/` on startup.
+Claude Code auto-discovers skills from `~/.claude/skills/` on startup.
 
-### Update the binary path
+### Set your binary path
 
-Open `SKILL.md` and update the binary path to match your `agy` installation:
+The skill hardcodes the path to your `agy` binary. Find it and update `SKILL.md`:
 
 ```bash
 # Find your agy binary
 which agy || find ~/.local/bin /usr/local/bin /opt/homebrew/bin -name "agy" 2>/dev/null
 ```
 
-Then update the path in `SKILL.md` (line under "## Binary Location").
+Open `SKILL.md` and replace the path under `## Binary Location` with your output above.
 
 ### Verify
 
@@ -68,7 +70,7 @@ Start a new Claude Code session and try:
 > Research the latest security advisories for Flask 3.x
 ```
 
-Claude should automatically delegate this to Antigravity via `agy -p`.
+Claude should automatically delegate this to Antigravity. You'll see it run `agy -p "..."` in its tool calls.
 
 ## How It Works
 
@@ -96,10 +98,13 @@ Token cost of doing it myself  >  Token cost of prompt + parsing output?
 ```
 
 Rules of thumb baked into the skill:
-- **< 5 tool calls** → Claude does it
-- **5–15 tool calls** → Claude considers delegating
-- **> 15 tool calls** → Claude delegates
-- **Web search / images / science** → Always delegates (exclusive capabilities)
+
+| Tool calls needed | Action |
+|-------------------|--------|
+| < 5 | Claude does it directly |
+| 5–15 | Claude considers delegating |
+| > 15 | Claude delegates |
+| Web search / images / science DBs | Always delegates (exclusive capabilities) |
 
 ### Command Pattern
 
@@ -111,7 +116,7 @@ Rules of thumb baked into the skill:
 |------|---------|
 | `-p` | Non-interactive mode: run, print, exit |
 | `--print-timeout` | Max wait time (default 5m) |
-| `--dangerously-skip-permissions` | Auto-approve tool calls |
+| `--dangerously-skip-permissions` | Auto-approve tool calls (needed for file writes) |
 | `--add-dir /path` | Add workspace directories |
 | `-c` / `--continue` | Continue most recent conversation |
 
@@ -124,17 +129,20 @@ Rules of thumb baked into the skill:
 | [`patterns.md`](patterns.md) | 8 advanced orchestration patterns with anti-patterns |
 | [`reference.md`](reference.md) | Capability comparison matrix between Claude Code & Antigravity |
 
-## Example Prompts That Trigger Delegation
+## Claude Code + agy: Real Use Cases and Example Prompts
 
-| You say to Claude Code | Claude delegates because |
-|------------------------|-------------------------|
-| *"Research the latest React 19 features"* | Needs web search (exclusive) |
-| *"Generate a dashboard mockup"* | Needs image generation (exclusive) |
-| *"Analyze the entire codebase architecture"* | `codebase_investigator` is better |
-| *"Look up rs1234567 in gnomAD"* | Science database (exclusive) |
-| *"Refactor all 30 API routes to use async"* | >15 tool calls, saves context |
-| *"Review this auth module for security issues"* | Second opinion, different model |
-| *"What's the protein structure for UniProt P12345?"* | AlphaFold skill (exclusive) |
+| You say to Claude Code | Why agy handles it |
+|------------------------|---------------------|
+| *"What are the breaking changes in React 19?"* | `google_web_search` grounding — more authoritative and real-time than DuckDuckGo |
+| *"Check our dependencies for known CVEs"* | Google Search grounding surfaces current advisories; Claude's training has a knowledge cutoff |
+| *"Compare Prisma vs Drizzle vs TypeORM for this stack"* | Google Search grounding for current benchmarks, GitHub pulse, and community sentiment |
+| *"Generate a dark-theme dashboard UI mockup"* | Image generation via `generate_image` — Claude Code cannot produce images |
+| *"Map the entire codebase: architecture, deps, entry points"* | `codebase_investigator` does this in one holistic pass; Claude would need dozens of reads |
+| *"Refactor all 30 API routes to async/await"* | >15 file edits — delegating keeps Claude's context window free |
+| *"Review this auth module for security vulnerabilities"* | Different model, different blind spots — catches issues Claude might normalize |
+| *"Look up allele frequency for rs1234567 in gnomAD"* | Requires the `gnomad-database` skill, one of 40+ science DBs exclusive to agy |
+| *"Get the AlphaFold structure for UniProt P12345"* | Requires `alphafold-database` + `uniprot-database` skills (exclusive to agy) |
+| *"Why does this page score 43 on Lighthouse?"* | Chrome DevTools Protocol access — Claude Code has no browser integration |
 
 ## Advanced Patterns
 
@@ -189,8 +197,6 @@ Edit the "Cost-Benefit Decision Framework" section in `SKILL.md` to tune when Cl
 | Claude Code | 2.1+ (Skills support) |
 | Antigravity CLI (`agy`) | 0.2.x+ |
 | macOS / Linux | Tested on macOS, should work on Linux |
-
-> **Note:** This skill replaces the deprecated `gemini-cli` skill. The Gemini CLI binary will stop working on June 18, 2026. Antigravity CLI (`agy`) is the official successor.
 
 ## Contributing
 
