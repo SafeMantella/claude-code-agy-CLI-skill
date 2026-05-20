@@ -104,7 +104,7 @@ Rules of thumb baked into the skill:
 | < 5 | Claude does it directly |
 | 5–15 | Claude considers delegating |
 | > 15 | Claude delegates |
-| Web search / images / science DBs | Always delegates (exclusive capabilities) |
+| Google Search / images / science DBs | Always delegates (exclusive capabilities) |
 
 ### Command Pattern
 
