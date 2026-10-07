@@ -6,7 +6,7 @@ Copy, customize the bracketed values, and run.
 ## 1. Codebase Analysis
 
 ```bash
-/Users/pedroarfux/.local/bin/agy -p "
+agy -p "
 Analyze the codebase at [PROJECT_PATH].
 
 Focus on:
@@ -29,7 +29,7 @@ Do NOT modify any files.
 ## 2. Security Audit
 
 ```bash
-/Users/pedroarfux/.local/bin/agy -p "
+agy -p "
 Perform a security audit of [PROJECT_PATH].
 
 Check for:
@@ -56,7 +56,7 @@ Do NOT modify any files.
 ## 3. Test Suite Generation
 
 ```bash
-/Users/pedroarfux/.local/bin/agy -p "
+agy -p "
 Generate comprehensive tests for [FILE_PATH].
 
 Testing framework: [pytest/jest/mocha/etc.]
@@ -81,7 +81,7 @@ Output ONLY the complete test file content.
 ## 4. API Documentation Generation
 
 ```bash
-/Users/pedroarfux/.local/bin/agy -p "
+agy -p "
 Generate API documentation for the REST endpoints in [PROJECT_PATH].
 
 For each endpoint, document:
@@ -100,7 +100,7 @@ Do NOT modify any files.
 ## 5. Database Schema Analysis
 
 ```bash
-/Users/pedroarfux/.local/bin/agy -p "
+agy -p "
 Analyze the database schema defined in [PROJECT_PATH].
 
 Provide:
@@ -119,7 +119,7 @@ Do NOT modify any files.
 ## 6. Performance Review
 
 ```bash
-/Users/pedroarfux/.local/bin/agy -p "
+agy -p "
 Review [FILE_PATH] for performance issues.
 
 Check for:
@@ -144,7 +144,7 @@ Do NOT modify any files.
 ## 7. Dependency Audit
 
 ```bash
-/Users/pedroarfux/.local/bin/agy -p "
+agy -p "
 Audit the dependencies in [PROJECT_PATH].
 
 Check:
@@ -164,7 +164,7 @@ Use Google Search for current vulnerability data.
 ## 8. Docker/Infrastructure Review
 
 ```bash
-/Users/pedroarfux/.local/bin/agy -p "
+agy -p "
 Review the Docker configuration in [PROJECT_PATH].
 
 Analyze:
@@ -184,7 +184,7 @@ Do NOT modify any files.
 ## 9. Migration Planning
 
 ```bash
-/Users/pedroarfux/.local/bin/agy -p "
+agy -p "
 Plan a migration for [PROJECT_PATH]:
 FROM: [current technology/version]
 TO: [target technology/version]
@@ -211,7 +211,7 @@ Do NOT modify any files.
 ## 10. Code Translation
 
 ```bash
-/Users/pedroarfux/.local/bin/agy -p "
+agy -p "
 Translate [FILE_PATH] from [SOURCE_LANGUAGE] to [TARGET_LANGUAGE].
 
 Preserve:
@@ -231,7 +231,7 @@ Output ONLY the translated file content.
 ## 11. Git History Analysis
 
 ```bash
-/Users/pedroarfux/.local/bin/agy -p "
+agy -p "
 Analyze the git history of [PROJECT_PATH] for the last [N] commits.
 
 Provide:
@@ -249,7 +249,7 @@ Do NOT modify any files.
 ## 12. Refactor with Tests
 
 ```bash
-/Users/pedroarfux/.local/bin/agy -p "
+agy -p "
 Refactor [FILE_PATH] to [GOAL — e.g., extract classes, reduce complexity, apply SOLID].
 
 Rules:

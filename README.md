@@ -46,21 +46,24 @@ You ──► Claude Code ──► "this needs web search" ──► agy -p "..
 
 ```bash
 # Clone into Claude Code's skills directory
-git clone git@github.com:SafeMantella/claude-code-agy-CLI-skill.git ~/.claude/skills/antigravity-cli
+git clone https://github.com/SafeMantella/claude-code-agy-CLI-skill.git ~/.claude/skills/antigravity-cli
 ```
 
 Claude Code auto-discovers skills from `~/.claude/skills/` on startup.
 
-### Set your binary path
+### Binary Resolution (Zero Configuration)
 
-The skill hardcodes the path to your `agy` binary. Find it and update `SKILL.md`:
+The skill automatically resolves your `agy` binary across platforms:
+1. Direct `$PATH` lookup (`agy`)
+2. Standard local paths (`~/.local/bin/agy`, `/usr/local/bin/agy`, `/opt/homebrew/bin/agy`)
+3. Optional override via the `$AGY_BIN` environment variable
 
-```bash
-# Find your agy binary
-which agy || find ~/.local/bin /usr/local/bin /opt/homebrew/bin -name "agy" 2>/dev/null
-```
+If `agy` is in your `$PATH` or in standard installation directories, **no manual edits to `SKILL.md` are required**.
 
-Open `SKILL.md` and replace the path under `## Binary Location` with your output above.
+### Execution Modes
+
+- **Supervised Mode (Default):** Runs read-only analysis, diff generation, and research without altering your code or files without approval.
+- **Autonomous Mode:** For continuous pipelines or batch unattended refactors, the skill supports passing `--dangerously-skip-permissions` (or setting `AGY_AUTONOMOUS=1`).
 
 ### Verify
 
@@ -70,7 +73,7 @@ Start a new Claude Code session and try:
 > Research the latest security advisories for Flask 3.x
 ```
 
-Claude should automatically delegate this to Antigravity. You'll see it run `agy -p "..."` in its tool calls.
+Claude will automatically delegate this to Antigravity. You'll see it run `agy -p "..."` in its tool calls.
 
 ## How It Works
 
